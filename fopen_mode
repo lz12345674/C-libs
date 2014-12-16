@@ -1,0 +1,71 @@
+/*
+      测试函数fopen()功能，和mode的用法。
+      功能：将输入的字符串，使用fwrite输出到文件中。
+      fopen（const char * filename， const char *mode）；
+      目的测试不同mode下的不同结果。
+*/
+
+# include <stdio.h>
+# include <string.h>
+
+int main(void)
+{
+    FILE *fp;
+    char *ch;
+  
+    printf("请输入字符串：");
+    scanf("%s", ch);
+    fp = fopen("a.txt", "a+");
+    if(NULL == fp)
+    {
+	    printf("文件不存在或无法创建！！\n");
+    	perror("错误原因");	
+    }
+    else
+    {
+	    fwrite(ch, 1, strlen(ch), fp);
+    }
+
+    return 0;
+}
+/*
+-------------mode = "r"结果------------
+
+请输入字符串：123444
+文件不存在或无法创建！！
+错误原因：: No such file or directory
+
+-------------mode = "w"结果------------
+
+请输入字符串：sadfdsf
+luozhao@ubuntu:~/C语言/Clib/stdio.h/file$ ls
+a.out  a.txt  file1.c
+
+-------------mode = "rw"结果------------
+
+请输入字符串：1231232312
+文件不存在或无法创建！！
+错误原因：: No such file or directory
+
+-------------mode = "ra"结果------------
+
+请输入字符串：sadfh
+文件不存在或无法创建！！
+错误原因：: No such file or directory
+
+-------------mode = "wa"结果------------
+
+请输入字符串：23434324
+luozhao@ubuntu:~/C语言/Clib/stdio.h/file$ ls
+a.out  a.txt  file1.c
+
+-------------mode = "a"结果------------
+
+请输入字符串：sdafsdafaf
+luozhao@ubuntu:~/C语言/Clib/stdio.h/file$ ls
+a.out  a.txt  file1.c
+
+-------------mode = "a+"结果------------
+
+
+*/
